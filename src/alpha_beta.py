@@ -1,4 +1,4 @@
-from src.state import Turn
+from math import floor
 
 
 def alpha_beta(state, depth, a, b, max_player):
@@ -30,67 +30,26 @@ def alpha_beta(state, depth, a, b, max_player):
 
 def heuristic_value(state):
     """"
-    :param state (State): model stanja na tabli
-    :return: broj poena (heuristic value) za "state" odnosno stanje na tabli
-
-    Nacin bodovanja:
-        Dama - 10
-        Obicna figura - 5
-        Figura na protivnickoj polovini table - 7
-        Figura u cosku - +2
-
-    Bodovi se dele brojem protivnickih figura
+    Evaluation function for current state
     """
 
     board = state.board
-    turn = state.turn
-    black, white = 0, 0
-    b_counter = 0
-    w_counter = 0
-    angle_positions = [0, 1, 3, 5, 57, 59, 61, 63, 48, 32, 16, 47, 31, 15]
 
-    for i in range(64):
-        if board[i] == 'b':
-            black += 1
-        elif board[i] == 'B':
-            black += 1.5
-        elif board[i] == 'w':
-            white += 1
-        elif board[i] == 'W':
-            white += 1.5
+    value = 0
+    b2 = 0
+    for i in range(63, -1, -1):
+        if b2 == 8: b2 = 0
 
-        # if board[i] == "B":
-        #     if i in angle_positions:
-        #         black = black + 2
-        #     black = black + 10
-        #     b_counter += 1
-        # if board[i] == "b" and i > 3:
-        #     if i in angle_positions:
-        #         black = black + 2
-        #     black = black + 7
-        #     b_counter += 1
-        # if board[i] == "b" and i <= 3:
-        #     if i in angle_positions:
-        #         black = black + 2
-        #     black = black + 5
-        #     b_counter += 1
-        #
-        # if board[i] == "W":
-        #     if i in angle_positions:
-        #          white = white + 2
-        #     white = white + 10
-        #     w_counter += 1
-        # if board[i] == "w" and i < 3:
-        #     if i in angle_positions:
-        #         white = white + 2
-        #     white = white + 7
-        #     w_counter += 1
-        # if board[i] == "w" and i >= 3:
-        #     if i in angle_positions:
-        #         white = white + 2
-        #     white = white + 5
-        #     w_counter += 1
+        if board[i] == '-':
+            b2 += 1
+            if b2 == 8: b2 = 0
+            continue
 
-    # black = black / w_counter
-    # white = white / b_counter
-    return black - white if turn == Turn.BLACK else white - black
+        b1 = floor(i/8)
+        if board[i] == 'w': value -= 5 + 7 - b1 + abs(b2 - 4 + abs(b1 - 4))
+        elif board[i] == 'b': value += 5 + b1 + abs(b2 - 4) + abs(b1 - 4)
+        elif board[i] == 'W': value -= 14 + abs(b2 - 4) + abs(b1 - 4)
+        elif board[i] == 'B': value += 14 + abs(b2 - 4) + abs(b1 - 4)
+        b2 += 1
+
+    return value

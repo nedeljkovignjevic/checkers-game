@@ -4,8 +4,7 @@ from chess import Piece, QUEEN, Color, WHITE, BLACK
 
 from src.board import init_board, init_gui_board, print_board, game_over
 from src.state import State, Turn
-from src.checkers import move_function, play_move, game_loop
-
+from src.checkers import move_function, play_move
 
 BOARD = ChessBoard(None)
 init_gui_board(BOARD)
@@ -64,7 +63,6 @@ def self_play():
 
 @app.route("/move")
 def move():
-
     if game_over(state_board):
         print("GAME IS OVER")
         response = app.response_class(
