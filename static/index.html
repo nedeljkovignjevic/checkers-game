@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+
+<style>
+.button {
+  background-color: #8B4513;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.self-button {
+  background-color: #8B4513;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+
+<title>Checkers</title>
+
+<link rel="stylesheet" type="text/css" href="static/chessboard.min.css">
+
+<script src="static/jquery.min.js"></script>
+<script src="static/chessboard.min.js"></script>
+
+</head>
+<body style="font-size: 20px;">
+
+<button class=button onclick="newGame()">RESET</button>
+<button class=self-button onclick="selfPlay()">SELF-PLAY</button><br/>
+
+<div id="board" style="width: 600px"></div>
+<p></p>
+
+
+<script type="text/javascript">
+
+var board = ChessBoard('board', {
+  position: 'start',
+  draggable: true,
+  onDrop: onDrop
+});
+
+var files = {"a": 0, "b": 1, "c": 2, "d": 3, "e": 4, "f": 5, "g": 6, "h": 7};
+function get_square(sq) {
+  return 8*(parseInt(sq.charAt(1)) - 1) + files[sq.charAt(0)];
+}
+
+
+function onDrop(source, target, piece) {
+  if(source == target) return
+
+  var promotion = piece.toLowerCase().charAt(1) == 'p' && parseInt(target.charAt(1)) == 8;
+
+  $.get('/move', {'from': get_square(source), 'to': get_square(target), 'promotion': promotion}, function(r) {
+    if (r.includes("game over")) {
+      document.querySelector('p').innerText = 'GAME OVER';
+    } else {
+      document.querySelector('p').innerText = '';
+      board.position(r);
+    }
+  });
+}
+
+function newGame() {
+  $.get('/new-game', function(r) {
+    document.querySelector('p').innerText = '';
+    board.position(r);
+  });
+}
+
+
+</script>
+
+</body>
+</html>
