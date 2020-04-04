@@ -1,8 +1,3 @@
-# DATASET -> http://www.fierz.ch/download.php
-# format -> http://www.bobnewell.net/filez/reinfeld2ndedition.pdf
-# ML update -> http://www.bobnewell.net/nucleus/checkers.php?itemid=1177
-# TODO: update rules, bitboard states, train
-
 from flask import Flask, request
 from chess import Board as ChessBoard
 from chess import Piece, QUEEN, Color, WHITE, BLACK
