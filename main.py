@@ -6,6 +6,7 @@ from src.board import init_board, init_gui_board, print_board, game_over
 from src.state import State, Turn
 from src.checkers import move_function, play_move
 
+
 BOARD = ChessBoard(None)
 init_gui_board(BOARD)
 state_board = init_board()
@@ -50,15 +51,10 @@ def hello():
 
 @app.route("/self-play")
 def self_play():
-    turn = Turn.WHITE
-    ret = '<html><head>'
-    # while not game_over(state_board):
-    #     state = State(state_board, turn, [])
-    #     move = move_function(state)
-    #     computer_move(move)
-    #     turn = Turn.BLACK if turn == Turn.WHITE else Turn.WHITE
-    #     ret += BOARD
-    return ret
+    """
+    TODO: Implement this
+    """
+    pass
 
 
 @app.route("/move")

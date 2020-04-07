@@ -1,6 +1,7 @@
 import numpy as np
-from src.board import init_board, show_board
+from src.board import init_board
 from src.checkers import play_move, Turn
+
 
 dic = {1: (7, 6),
        2: (7, 4),

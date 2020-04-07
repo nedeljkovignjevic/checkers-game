@@ -7,7 +7,11 @@ Implementation of checkers (draughts) strategy board game with AI based bot
 ## Dataset used for training
  -> http://www.fierz.ch/download.php
  
- About 20000 games, results are mostly draw (about 14000)
+ About 20000 games, results are mostly draw (about 14000) - not so great dataset for neural nets but i can't find better one
+ 
+ Currently AI bot (CNN) is pretty bad so heuristic value is used for evalution.
+ 
+ Need to try some other options (reinforcement learning, temporal difference learning, neuroevolution)
  </br></br>
 
 ## Requirements
@@ -20,10 +24,10 @@ Implementation of checkers (draughts) strategy board game with AI based bot
 
 ## Usage
 ```
+At this phase game does not support (interface) validation and multiple jumps so dont use it right now :)
 1. python main.py  # runs web server on localhost:5000
 2. Web browse to localhost:5000
 ```
-<br /><br />
 
 ## References
 - Dataset -> http://www.fierz.ch/download.php

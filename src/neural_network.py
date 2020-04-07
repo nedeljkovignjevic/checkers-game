@@ -20,13 +20,13 @@ class CheckersDataset(Dataset):
         return self.x.shape[0]
 
     def __getitem__(self, index):
-        return (self.x[index], self.y[index])
+        return self.x[index], self.y[index]
 
 
 class Net(nn.Module):
     """
-    Random CNN, not working
-    TODO: RL, TD, NEAT
+    Random CNN (similar used for chess), not working, need to try some other options
+    TODO: Try with RL, TD, NEAT (neuroevolution) ...
     """
 
     def __init__(self):
