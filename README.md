@@ -7,10 +7,8 @@ Implementation of checkers (draughts) strategy board game with AI based bot
 ## Dataset used for training
  -> http://www.fierz.ch/download.php
  
- About 20000 games, results are mostly draw (about 14000) - not so great dataset for neural nets but i can't find better one
- 
- Currently AI bot (CNN) is pretty bad so heuristic value is used for evalution.
- 
+ About 20000 games, results are mostly draw (about 14000) - not so great dataset for neural nets but i can't find better one.
+ Currently AI bot (CNN) is pretty bad so heuristic value is used for evalution.  
  Need to try some other options (reinforcement learning, temporal difference learning, neuroevolution)
  </br></br>
 
@@ -33,4 +31,3 @@ At this phase game does not support (interface) validation and multiple jumps so
 - Dataset -> http://www.fierz.ch/download.php
 - Format -> http://www.bobnewell.net/filez/reinfeld2ndedition.pdf
 - ML update -> http://www.bobnewell.net/nucleus/checkers.php?itemid=1177
-
