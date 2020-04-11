@@ -76,7 +76,7 @@ def move_function(state: State):
 
     best_move = None
     val = -10000
-    depth = 5
+    depth = 4
     for state in state.get_states():
         score = alpha_beta(state, depth, -10000, 10000, True)
         if score > val:
@@ -95,8 +95,8 @@ def play_move(board: list, move: list, turn: Turn):
 
     if turn.BLACK:
         board[move[1]] = piece if move[1] < 56 else piece.upper()
-    if turn.WHITE:
-        board[move[1]] = piece if move[1] > 7 else piece.upper()
+    elif turn.WHITE:
+        board[move[1]] = piece if move[1] > 8 else piece.upper()
 
     if abs(move[0] - move[1]) > 9:
         x = move[1] - move[0]

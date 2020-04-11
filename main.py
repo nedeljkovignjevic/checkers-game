@@ -4,7 +4,7 @@ from chess import Piece, QUEEN, Color, WHITE, BLACK
 
 from src.board import init_board, init_gui_board, print_board, game_over
 from src.state import State, Turn
-from src.checkers import move_function, play_move, game_loop, self_play
+from src.checkers import move_function, play_move
 
 
 BOARD = ChessBoard(None)
@@ -49,12 +49,12 @@ def hello():
     return index_html.replace('start', BOARD.fen())
 
 
-@app.route("/self-play")
-def self_play():
-    """
-    TODO: Implement this
-    """
-    pass
+# @app.route("/self-play")
+# def self_play():
+#     """
+#     TODO: Implement this
+#     """
+#     pass
 
 
 @app.route("/move")
@@ -104,6 +104,6 @@ def new_game():
 
 if __name__ == '__main__':
 
-    # app.run(debug=True)
+    app.run(debug=True)
     # game_loop()
-    self_play()
+    # self_play()

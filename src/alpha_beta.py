@@ -1,4 +1,10 @@
+import torch
+import numpy as np
 from math import floor
+
+
+from src.neural_network import Net
+from src.util import mapa
 
 
 def alpha_beta(state, depth, a, b, max_player):
@@ -7,7 +13,7 @@ def alpha_beta(state, depth, a, b, max_player):
     """
 
     if depth == 0 or state.is_terminal_state():
-        return heuristic_value(state)
+        return value_network(state)
 
     if max_player is True:
         value = -10000
@@ -45,11 +51,44 @@ def heuristic_value(state):
             if b2 == 8: b2 = 0
             continue
 
-        b1 = floor(i/8)
-        if board[i] == 'w': value -= 5 + 7 - b1 + abs(b2 - 4 + abs(b1 - 4))
-        elif board[i] == 'b': value += 5 + b1 + abs(b2 - 4) + abs(b1 - 4)
-        elif board[i] == 'W': value -= 14 + abs(b2 - 4) + abs(b1 - 4)
-        elif board[i] == 'B': value += 14 + abs(b2 - 4) + abs(b1 - 4)
+        b1 = floor(i / 8)
+        if board[i] == 'w':
+            value -= 5 + 7 - b1 + abs(b2 - 4 + abs(b1 - 4))
+        elif board[i] == 'b':
+            value += 5 + b1 + abs(b2 - 4) + abs(b1 - 4)
+        elif board[i] == 'W':
+            value -= 14 + abs(b2 - 4) + abs(b1 - 4)
+        elif board[i] == 'B':
+            value += 14 + abs(b2 - 4) + abs(b1 - 4)
         b2 += 1
 
     return value
+
+
+def value_network(state):
+    model = Net()
+    model.load_state_dict(torch.load('model/model.pth', map_location=torch.device('cpu')))
+    model.eval()
+
+    board = state.board
+    state = get_state(board)
+    state = torch.FloatTensor(state).unsqueeze(0)
+    prediction = model(state)
+    return prediction
+
+
+def get_state(board: list):
+    state = np.empty(32, int)
+    for key in mapa.keys():
+        if board[mapa[key]] == 'w':
+            state[key - 1] = -1
+        elif board[mapa[key]] == 'b':
+            state[key - 1] = 1
+        elif board[mapa[key]] == 'W':
+            state[key - 1] = -2
+        elif board[mapa[key]] == "B":
+            state[key - 1] = 2
+        else:
+            state[key - 1] = 0
+
+    return state

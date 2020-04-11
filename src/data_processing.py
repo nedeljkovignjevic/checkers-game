@@ -1,55 +1,22 @@
 import numpy as np
-from src.board import init_board
+from src.board import init_board, print_board
 from src.checkers import play_move, Turn
+from src.util import mapa
 
 
-dic = {1: (7, 6),
-       2: (7, 4),
-       3: (7, 2),
-       4: (7, 0),
-       5: (6, 7),
-       6: (6, 5),
-       7: (6, 3),
-       8: (6, 1),
-       9: (5, 6),
-       10: (5, 4),
-       11: (5, 2),
-       12: (5, 0),
-       13: (4, 7),
-       14: (4, 5),
-       15: (4, 3),
-       16: (4, 1),
-       17: (3, 6),
-       18: (3, 4),
-       19: (3, 2),
-       20: (3, 0),
-       21: (2, 7),
-       22: (2, 5),
-       23: (2, 3),
-       24: (2, 1),
-       25: (1, 6),
-       26: (1, 4),
-       27: (1, 2),
-       28: (1, 0),
-       29: (0, 7),
-       30: (0, 5),
-       31: (0, 3),
-       32: (0, 1)}
-
-
-def get_state(board: dict):
+def get_state(board: list):
     state = np.empty(32, int)
-    for key in dic.keys():
-        if board[dic[key]] == 'w':
-            state[key-1] = -1
-        elif board[dic[key]] == 'b':
-            state[key-1] = 1
-        elif board[dic[key]] == 'W':
-            state[key-1] = -2
-        elif board[dic[key]] == "B":
-            state[key-1] = 2
+    for key in mapa.keys():
+        if board[mapa[key]] == 'w':
+            state[key - 1] = -1
+        elif board[mapa[key]] == 'b':
+            state[key - 1] = 1
+        elif board[mapa[key]] == 'W':
+            state[key - 1] = -2
+        elif board[mapa[key]] == "B":
+            state[key - 1] = 2
         else:
-            state[key-1] = 0
+            state[key - 1] = 0
 
     return state
 
@@ -77,7 +44,7 @@ def get_dataset(n_samples=None):
 
             board = init_board()
             skiping = True
-            turn = Turn.BLACK
+            turn = Turn.WHITE
             for token in tokens:
                 if skiping is True:
                     if token == '1.':
@@ -90,16 +57,22 @@ def get_dataset(n_samples=None):
                         new_token = token.split('x')
                         n = len(new_token)
                         for i in range(n - 1):
-                            try: move = [dic[int(new_token[i])], dic[int(new_token[i + 1])]]
-                            except: break
+                            try:
+                                move = [mapa[int(new_token[i])], mapa[int(new_token[i + 1])]]
+                            except:
+                                break
                             play_move(board, move, turn)
-                            # show_board(board)
+                            # print_board(board)
+                            # print()
                     else:
                         t = token.split('-')
-                        try: move = [dic[int(t[0])], dic[int(t[1])]]
-                        except: break
+                        try:
+                            move = [mapa[int(t[0])], mapa[int(t[1])]]
+                        except:
+                            break
                         play_move(board, move, turn)
-                        # show_board(board)
+                        # print_board(board)
+                        # print()
 
                     states.append(get_state(board))
                     values.append(value[val])
@@ -112,4 +85,4 @@ def get_dataset(n_samples=None):
     print(f'1-0     -> {n_games["1-0"]}')
 
     x, y = np.array(states), np.array(values)
-    np.savez("data/processed.npz", x, y)
+    np.savez("data/new_data_processed.npz", x, y)

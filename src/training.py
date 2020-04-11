@@ -8,7 +8,7 @@ from src.neural_network import Net, CheckersDataset
 def train():
     device = 'cuda'
     dataset = CheckersDataset()
-    train_loader = DataLoader(dataset, batch_size=64, shuffle=True)
+    train_loader = DataLoader(dataset, batch_size=128, shuffle=True)
 
     model = Net()
     optimizer = optim.Adam(model.parameters())
@@ -20,7 +20,7 @@ def train():
     for epoch in range(5):
         all_loss = 0
         n_loss = 0
-        for (data, target) in train_loader:
+        for data, target in train_loader:
             target = target.unsqueeze(-1)
             data, target = data.to(device), target.to(device)
 
