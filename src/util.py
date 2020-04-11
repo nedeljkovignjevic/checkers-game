@@ -1,3 +1,5 @@
+import numpy as np
+
 """
 Getting all legal steps for 'get_states' function from State class
 """
@@ -70,3 +72,20 @@ mapa = {1: 6,  # Dictionary for data processing
         30: 61,
         31: 59,
         32: 57}
+
+
+def map_state(board: list):
+    state = np.empty(32, int)
+    for key in mapa.keys():
+        if board[mapa[key]] == 'w':
+            state[key - 1] = -1
+        elif board[mapa[key]] == 'b':
+            state[key - 1] = 1
+        elif board[mapa[key]] == 'W':
+            state[key - 1] = -2
+        elif board[mapa[key]] == "B":
+            state[key - 1] = 2
+        else:
+            state[key - 1] = 0
+
+    return state

@@ -1,24 +1,7 @@
 import numpy as np
 from src.board import init_board, print_board
 from src.checkers import play_move, Turn
-from src.util import mapa
-
-
-def get_state(board: list):
-    state = np.empty(32, int)
-    for key in mapa.keys():
-        if board[mapa[key]] == 'w':
-            state[key - 1] = -1
-        elif board[mapa[key]] == 'b':
-            state[key - 1] = 1
-        elif board[mapa[key]] == 'W':
-            state[key - 1] = -2
-        elif board[mapa[key]] == "B":
-            state[key - 1] = 2
-        else:
-            state[key - 1] = 0
-
-    return state
+from src.util import mapa, map_state
 
 
 def get_dataset(n_samples=None):
@@ -74,7 +57,7 @@ def get_dataset(n_samples=None):
                         # print_board(board)
                         # print()
 
-                    states.append(get_state(board))
+                    states.append(map_state(board))
                     values.append(value[val])
                     turn = Turn.BLACK if turn == Turn.WHITE else Turn.WHITE
 

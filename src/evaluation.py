@@ -1,10 +1,13 @@
 import torch
-import numpy as np
 from math import floor
 
-
 from src.neural_network import Net
-from src.util import mapa
+from src.util import map_state
+
+
+MODEL = Net()
+MODEL.load_state_dict(torch.load('model/model.pth', map_location=torch.device('cpu')))
+MODEL.eval()
 
 
 def alpha_beta(state, depth, a, b, max_player):
@@ -36,7 +39,7 @@ def alpha_beta(state, depth, a, b, max_player):
 
 def heuristic_value(state):
     """"
-    Evaluation function for current state
+    Using heurustic method to evaluate board sate
     """
 
     board = state.board
@@ -66,29 +69,13 @@ def heuristic_value(state):
 
 
 def value_network(state):
-    model = Net()
-    model.load_state_dict(torch.load('model/model.pth', map_location=torch.device('cpu')))
-    model.eval()
+    """
+    Using neural network to evaluate board state
+    """
 
     board = state.board
-    state = get_state(board)
+    state = map_state(board)
     state = torch.FloatTensor(state).unsqueeze(0)
-    prediction = model(state)
+    prediction = MODEL(state)
     return prediction
 
-
-def get_state(board: list):
-    state = np.empty(32, int)
-    for key in mapa.keys():
-        if board[mapa[key]] == 'w':
-            state[key - 1] = -1
-        elif board[mapa[key]] == 'b':
-            state[key - 1] = 1
-        elif board[mapa[key]] == 'W':
-            state[key - 1] = -2
-        elif board[mapa[key]] == "B":
-            state[key - 1] = 2
-        else:
-            state[key - 1] = 0
-
-    return state

@@ -1,5 +1,5 @@
 from src.board import init_board, print_board, game_over
-from src.alpha_beta import alpha_beta
+from src.evaluation import alpha_beta
 from src.state import State, Turn
 
 
@@ -93,10 +93,10 @@ def play_move(board: list, move: list, turn: Turn):
     piece = board[move[0]]
     board[move[0]] = '-'
 
-    if turn.BLACK:
-        board[move[1]] = piece if move[1] < 56 else piece.upper()
-    elif turn.WHITE:
+    if turn == turn.BLACK:
         board[move[1]] = piece if move[1] > 8 else piece.upper()
+    elif turn == turn.WHITE:
+        board[move[1]] = piece if move[1] < 56 else piece.upper()
 
     if abs(move[0] - move[1]) > 9:
         x = move[1] - move[0]
