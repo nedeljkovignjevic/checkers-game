@@ -33,4 +33,4 @@ At this phase game does not support (interface) validation and multiple jumps so
 - ML update -> http://www.bobnewell.net/nucleus/checkers.php?itemid=1177
 - TD -> https://www.researchgate.net/publication/221185124_Temporal_Difference_Approach_to_Playing_Give-Away_Checkers
 - TD -> http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.80.6366&rep=rep1&type=pdf
-- NN (nzm) -> https://www.researchgate.net/publication/3302690_Evolving_neural_networks_to_play_checkers_without_expert_knowledge
+- https://www.researchgate.net/publication/3302690_Evolving_neural_networks_to_play_checkers_without_expert_knowledge
