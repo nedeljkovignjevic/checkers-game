@@ -12,7 +12,7 @@ class CheckersDataset(Dataset):
     """
 
     def __init__(self):
-        data = np.load('data/new_data_processed.npz')
+        data = np.load('data/processed.npz')
         self.x = data['arr_0']
         self.y = data['arr_1']
 

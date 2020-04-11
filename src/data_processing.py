@@ -4,14 +4,13 @@ from src.checkers import play_move, Turn
 from src.util import mapa, map_state
 
 
-def get_dataset(n_samples=None):
+def get_dataset():
     """
-    Parse checkers OCA dataset and save
+    Parse checkers OCA dataset and save as numpy array
 
-    values:
-        draw        1/2-1/2: 0
-        black wins  0-1: 1
-        white wins  1-0: -1
+    1/2-1/2: 0  -> draw
+    0-1: 1      -> black wins
+    1-0: -1     -> white wins
     """
 
     states, values = [], []
@@ -68,4 +67,4 @@ def get_dataset(n_samples=None):
     print(f'1-0     -> {n_games["1-0"]}')
 
     x, y = np.array(states), np.array(values)
-    np.savez("data/new_data_processed.npz", x, y)
+    np.savez("data/processed.npz", x, y)
