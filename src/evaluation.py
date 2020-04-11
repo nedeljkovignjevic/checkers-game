@@ -6,7 +6,7 @@ from src.util import map_state
 
 
 MODEL = Net()
-MODEL.load_state_dict(torch.load('model/model.pth', map_location=torch.device('cpu')))
+MODEL.load_state_dict(torch.load('model/model_test.pth', map_location=torch.device('cpu')))
 MODEL.eval()
 
 

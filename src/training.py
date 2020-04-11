@@ -24,7 +24,7 @@ def train():
             target = target.unsqueeze(-1)
             data, target = data.to(device), target.to(device)
             data, target = data.float(), target.float()
-            
+
             optimizer.zero_grad()
             output = model(data)
 
