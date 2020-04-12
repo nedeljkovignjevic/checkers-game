@@ -20,7 +20,7 @@ Main idea is to use supervised learning to (pre)train some model and then to imp
 ## Dataset used for training
  -> http://www.fierz.ch/download.php
  
- About 20000 games, results are mostly draw (about 14000) - not so great dataset for neural nets but i can't find better one.
+ About 20000 games, results are mostly draw (about 14000) - not so great for neural nets but i can't find better one atm.
  </br></br>
 
 ## Requirements
