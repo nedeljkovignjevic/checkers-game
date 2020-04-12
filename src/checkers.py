@@ -76,7 +76,7 @@ def move_function(state: State):
 
     best_move = None
     val = -10000
-    depth = 4
+    depth = 5
     for state in state.get_states():
         score = alpha_beta(state, depth, -10000, 10000, True)
         if score > val:

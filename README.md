@@ -2,14 +2,21 @@
 Implementation of checkers (draughts) strategy board game with AI based bot
 
 ![check](https://user-images.githubusercontent.com/54076398/78457052-dac23c80-76a7-11ea-8d28-89a322a5bdc7.jpg)
+
+This project is intended to showcase the ability of neural networks to learn to play a game of checkers.</br>
+The trained network is used to guide a search algorithm (minimax with alpha-beta pruning) to select the most promising moves in games.</br>
+Neural network is used for evaluating the board state, it takes board state as input and outputs value between -1 and 1 (values close to -1 -> white wins, values close to 1 -> black wins). AlphaZero introduced this as "value network".</br></br>
+Currently, neural network is just MLP (multilayer perceptron) model with 6 hidden layers:</br>
+-> 32 neurons for input layer | 64, 64, 128, 128, 256, 256 for hidden layers and 1 neuron for output layer</br></br>
+I'm working on temporal difference learning method (TD leaf) that seems way better then MLP atm.</br>
+I tried with CNN also but for some reason it didn't worked.</br>
+Main idea is to use supervised learning to (pre)train some net and then improve that model with self-play, what DeepMind did with AlphaZero
 </br></br>
 
 ## Dataset used for training
  -> http://www.fierz.ch/download.php
  
  About 20000 games, results are mostly draw (about 14000) - not so great dataset for neural nets but i can't find better one.
- Currently AI bot (CNN) is pretty bad so heuristic value is used for evalution.  
- Need to try some other options (reinforcement learning, temporal difference learning, neuroevolution)
  </br></br>
 
 ## Requirements
@@ -22,9 +29,11 @@ Implementation of checkers (draughts) strategy board game with AI based bot
 
 ## Usage
 ```
-At this phase game does not support (interface) validation and multiple jumps so dont use it right now :)
 1. python main.py  # runs web server on localhost:5000
 2. Web browse to localhost:5000
+
+At this phase game does not support (interface) validation and multiple jumps so dont use it right now :)
+Console version is fully featured (it supports validation and multiple jumps)
 ```
 
 ## References
