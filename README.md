@@ -10,9 +10,10 @@ to select the most promising moves in games.</br>
 Neural network is used for evaluating the board state, it takes board state as input and outputs value between -1 and 1</br>
 (values close to -1 -> white wins, values close to 1 -> black wins). AlphaZero introduced this as "value network".</br></br>
 Currently, neural network is just MLP (multilayer perceptron) model with 6 hidden layers:</br>
--> 32 neurons for input layer | 64, 64, 128, 128, 256, 256 for hidden layers and 1 neuron for output layer</br></br>
-I'm working on temporal difference learning method (TD leaf) that seems way better then MLP atm.</br>
-I tried with CNN also but for some reason it didn't worked.</br>
+-> 32 neurons for input layer | 64, 64, 128, 128, 256, 256 for hidden layers and 1 neuron for output layer
+</br></br>
+I'm working on temporal difference learning method (TD leaf) that seems way better then MLP atm</br>
+(need some time to fully-train the model).</br></br>
 Main idea is to use supervised learning to (pre)train some model and then to improve that model with self-play, what DeepMind did with AlphaZero.
 </br></br>
 
